@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -x
+ set -x
 
 RED='\033[1;31m' # alarm
 GRN='\033[1;32m' # notice
@@ -37,7 +37,7 @@ while read line
 do
   img="${line##*/}"
   sudo podman tag $line $registry/$img &>/dev/null
-  sudo podman push --tls-verify=false $registry/library/$img &>/dev/null
+  sudo podman push --tls-verify=false $registry/$img &>/dev/null
   if [[ "$?" == 0 ]]; then
     printf "${GRN}push $registry/$img success${NC}\n"
   else
@@ -72,5 +72,5 @@ fi
 if which docker &>/dev/null; then
   podman_command
 else
-  docker_command  
+  docker_command
 fi

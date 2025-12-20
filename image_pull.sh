@@ -24,10 +24,7 @@ done < images.txt
 
 sudo docker save $image_name > k8s_images.tar
 
-tar --zstd -cf images.tar.zst k8s_images.tar
-
-rm -rf k8s_images.tar
-printf "${GRN}All images have been saved as images.tar.zst${NC}\n"
+printf "${GRN}All images have been saved as k8s_images.tar${NC}\n"
 }
 
 podman_command() {
@@ -43,10 +40,7 @@ done < images.txt
 
 sudo podman save -m $image_name > k8s_images.tar
 
-tar --zstd -cf images.tar.zst k8s_images.tar
-
-rm -rf k8s_images.tar
-printf "${GRN}All images have been saved as images.tar.zst${NC}\n"
+printf "${GRN}All images have been saved as k8s_images.tar${NC}\n"
 }
 
 if ! which docker &>/dev/null && ! which podman &>/dev/null; then

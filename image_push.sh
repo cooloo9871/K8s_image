@@ -1,6 +1,6 @@
 #!/bin/bash
 
- set -x
+# set -x
 
 RED='\033[1;31m' # alarm
 GRN='\033[1;32m' # notice

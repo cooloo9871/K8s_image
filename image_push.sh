@@ -70,7 +70,7 @@ if [[ "$#" < 1 ]]; then
 fi
 
 if which docker &>/dev/null; then
-  docker_command
-else
   podman_command
+else
+  docker_command  
 fi

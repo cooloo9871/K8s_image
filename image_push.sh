@@ -19,12 +19,12 @@ sudo docker load < k8s_images.tar &>/dev/null
 while read line
 do
   img="${line##*/}"
-  sudo docker tag $line $registry/library/$img &>/dev/null
-  sudo docker push $registry/library/$img &>/dev/null
+  sudo docker tag $line $registry/$img &>/dev/null
+  sudo docker push $registry/$img &>/dev/null
   if [[ "$?" == 0 ]]; then
-    printf "${GRN}push $registry/library/$img success${NC}\n"
+    printf "${GRN}push $registry/$img success${NC}\n"
   else
-    printf "${RED}push $registry/library/$img fail${NC}\n"
+    printf "${RED}push $registry/$img fail${NC}\n"
   fi
 done < images.txt
 }
@@ -36,12 +36,12 @@ sudo podman load < k8s_images.tar &>/dev/null
 while read line
 do
   img="${line##*/}"
-  sudo podman tag $line $registry/library/$img &>/dev/null
+  sudo podman tag $line $registry/$img &>/dev/null
   sudo podman push --tls-verify=false $registry/library/$img &>/dev/null
   if [[ "$?" == 0 ]]; then
-    printf "${GRN}push $registry/library/$img success${NC}\n"
+    printf "${GRN}push $registry/$img success${NC}\n"
   else
-    printf "${RED}push $registry/library/$img fail${NC}\n"
+    printf "${RED}push $registry/$img fail${NC}\n"
   fi
 done < images.txt
 }
@@ -50,7 +50,7 @@ help() {
   cat <<EOF
 Usage: push.sh [harbor domain]
 
-for example: push.sh harbor.example.com
+for example: push.sh harbor.example.com/library
 EOF
   exit
 }

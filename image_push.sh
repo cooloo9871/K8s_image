@@ -14,9 +14,6 @@ image_name=$(paste -sd' ' images.txt)
 
 
 docker_command() {
-
-tar --zstd -xf images.tar.zst
-
 sudo docker load < k8s_images.tar &>/dev/null
 
 while read line
@@ -33,8 +30,6 @@ done < images.txt
 }
 
 podman_command() {
-
-tar --zstd -xf images.tar.zst
 
 sudo podman load < k8s_images.tar &>/dev/null
 

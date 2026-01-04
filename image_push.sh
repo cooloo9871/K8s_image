@@ -78,7 +78,7 @@ if [[ "$#" < 1 ]]; then
   help
 fi
 
-if which docker &>/dev/null; then
+if which podman &>/dev/null; then
   process_images "podman"
 else
   process_images "docker"

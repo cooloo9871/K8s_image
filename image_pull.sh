@@ -92,8 +92,8 @@ if [[ "$?" != "0" ]]; then
 fi
 
 # 執行主邏輯
-if which docker &>/dev/null; then
-    docker_command
-else
+if which podman &>/dev/null; then
     podman_command
+else
+    docker_command
 fi

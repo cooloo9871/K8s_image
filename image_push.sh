@@ -21,9 +21,20 @@ process_images() {
     tls_flag="--tls-verify=false"
   fi
 
-  # 嘗試載入 tar 檔 (如果檔案存在)
-  if [[ -f k8s_images.tar ]]; then
-    sudo $cmd load < k8s_images.tar &>/dev/null
+  # 1. 檢查檔案是否存在
+  if [[ ! -f k8s_images.tar ]]; then
+    printf "${RED}Error: k8s_images.tar file not found${NC}\n"
+    exit 1
+  fi
+
+  # 2. 嘗試載入 tar 檔
+  printf "Loading k8s_images.tar... "
+  if ! sudo $cmd load < k8s_images.tar &>/dev/null; then
+    printf "${RED}Failed${NC}\n"
+    printf "${RED}Error: Failed to load k8s_images.tar${NC}\n"
+    exit 1
+  else
+    printf "${GRN}Success${NC}\n"
   fi
 
   # 讀取 images.txt，過濾掉空行與註解
